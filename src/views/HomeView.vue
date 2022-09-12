@@ -1,10 +1,19 @@
 <script setup lang="ts">
-import TheWelcome from '@/components/TheWelcome.vue'
+import { ref } from 'vue';
+import { useBase64 } from '@vueuse/core'
+
+const file = ref(null)
+const { base64: url } = useBase64(file)
+
+const handleInput = (e: InputEvent) => {
+  file.value = e.target.files[0]
+}
 </script>
 
 <template>
-
 <div class="container">
+  <img :src="url" alt="" />
+  <input type="file" accept="image/*" @input="handleInput">
   <div class="row-1">
     <div class="one">
       <img class="img-one" src="/src/assets/image.png" alt="">
