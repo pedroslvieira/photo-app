@@ -16,8 +16,11 @@ const handleInput = (e: InputEvent) => {
 <div class="container">
   <div class="input-div">
     <input class="input" type="file" accept="image/*" @input="handleInput">
-    <img class="input-image" :src="url" alt="" />
+    <img v-if="url" class="input-image" :src="url" alt="" />
     <p v-if="!url" class="input-text">Drop an image or click to select</p>
+  </div>
+  <div v-if="!url" class="output-div">
+    <p class="input-text">No image selected</p>
   </div>
   <TheOutput :url="url" />
 </div>
@@ -27,7 +30,9 @@ const handleInput = (e: InputEvent) => {
 <style>
 .container {
   display: flex;
+  gap: 40px;
 }
+
 
 .input-div {
   width: 200px;
@@ -36,6 +41,13 @@ const handleInput = (e: InputEvent) => {
   position: relative;
   display: flex;
   overflow: hidden;
+}
+
+.output-div {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  border: dotted 3px #3339;
 }
 
 .input {
